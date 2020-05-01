@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Wifi Simulator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+
+    
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+ 
+
+<div class="container-fluid text-center">   
+
+  <div class="row content">
+    
+    <div class="col-sm-2" style="height: fit-content; background-color: rgb(190, 194, 194);">
+      
+    
+      <div class="slidecontainer" style="padding-bottom: 30px; height: 700px;">
+
+      <div class="panel-group" id="accordion" style="height: 100%;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#collapse1">Packet size</a>
+            </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse">
+            <div class="panel-body">
+              <p>PG1:<input type="range" min="1" max="2" value="1" class="slider" id="size1" onmouseup="mouseUp()"></p>
+              <p>PG2:<input type="range" min="1" max="2" value="1" class="slider" id="myRange" onmouseup="mouseUp()"></p><br>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse"  href="#collapse2">Delay</a>
+            </h4>
+          </div>
+          <div id="collapse2" class="panel-collapse collapse">
+            <div class="panel-body">
+              <p>PG1:<input type="range" min="1" max="2" value="1" class="slider" id="myRange" onmouseup="mouseUp()"></p>
+              <p>PG2:<input type="range" min="1" max="2" value="1" class="slider" id="myRangde" onmouseup="mouseUp()"></p>
+            </div>
+          </div>
+        </div>
+        
+      </div> 
+
+      </div>
+
+
+  
+
+
+    </div>
+
+    <div class="col-sm-8 text-left"> 
+      <h1 id = 'out'>Welcome</h1>
+      <div class="container">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+<footer class="container-fluid text-center">
+  <p>Github: @nathanielCherian</p>
+</footer>
+
+<script>
+         var sliders = document.getElementsByClassName('slider');
+          var out = document.getElementById('out')
+          out.innerHTML = document.getElementById('size1').value;
+
+          function mouseUp(){
+            out.innerHTML = "mouseup";
+
+
+
+          }
+	      
+
+</script>
+
+<script type="text/javascript">
+
+  let myChart = document.getElementById('myChart').getContext('2d');
+
+  // Global Options
+  Chart.defaults.global.defaultFontFamily = 'Lato';
+  Chart.defaults.global.defaultFontSize = 18;
+  Chart.defaults.global.defaultFontColor = '#777';
+
+  let massPopChart = new Chart(myChart, {
+    type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+    data:{
+      labels:['Method 1', 'Method 2', 'Method 2'],
+      datasets:[{
+        label:'P1.paired',
+        data:[1,2,3,4
+
+        ],
+        //backgroundColor:'green',
+        backgroundColor:[
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+        ],
+        borderWidth:1,
+        borderColor:'#777',
+        hoverBorderWidth:3,
+        hoverBorderColor:'#000'
+      },
+      {
+        label:'P1.unpaired',
+        data:[1,2,3,4
+
+        ],
+        //backgroundColor:'green',
+        backgroundColor:[
+        'red','green','blue'
+        ],
+        borderWidth:1,
+        borderColor:'#777',
+        hoverBorderWidth:3,
+        hoverBorderColor:'#000'
+      },
+      {
+        label:'P2.paired',
+        data:[1,2,3,4],
+        //backgroundColor:'green',
+        backgroundColor:[
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+        ],
+        borderWidth:1,
+        borderColor:'#777',
+        hoverBorderWidth:3,
+        hoverBorderColor:'#000'
+      },
+      {
+        label:'P2.unpaired',
+        data:[1,2,3,4],
+        //backgroundColor:'green',
+        backgroundColor:[
+        'red','green','blue'
+        ],
+        borderWidth:1,
+        borderColor:'#777',
+        hoverBorderWidth:3,
+        hoverBorderColor:'#000'
+      }
+      ]
+    },
+
+    options:{
+      title:{
+        display:true,
+        text:'Average moves for every player',
+        fontSize:25
+      },
+      legend:{
+        display:true,
+        position:'right',
+        labels:{
+          fontColor:'#000'
+        }
+      },
+      layout:{
+        padding:{
+          left:50,
+          right:0,
+          bottom:0,
+          top:0
+        }
+      },
+      tooltips:{
+        enabled:true
+      },
+      scales: {
+          yAxes: [{
+              ticks: {
+                beginAtZero:true
+              }
+          }]
+      }
+    }
+  });
+
+</script>
+
+</body>
+
+
+</html>
