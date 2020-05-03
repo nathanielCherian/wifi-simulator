@@ -78,33 +78,33 @@
     <div class="col-sm-2" style="height: fit-content; background-color: rgb(190, 194, 194);">
       
     
-      <div class="slidecontainer" style="padding-bottom: 30px; height: 700px;">
+      <div class="slidecontainer" style="padding-bottom: 30px; height: 700px; padding-top: 20px;">
 
       <div class="panel-group" id="accordion" style="height: 100%;">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse" href="#collapse1">Packet size</a>
+              <a data-toggle="collapse" href="#collapse1" id="ps">Packet size</a>
             </h4>
           </div>
           <div id="collapse1" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="sz1">PG1: </p><input type="range" min="10" max="500" value="100" class="slider" id="size1" onmouseup="mouseUp()"oninput="updateLabel()">
-              <p id="sz2">PG2:</p><input type="range" min="10" max="500" value="100" class="slider" id="size2" onmouseup="mouseUp()"oninput="updateLabel()">
+              <p id="sz1">PG1: </p><input type="range" min="10" max="500" value="100" class="slider" id="size1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="sz2">PG2:</p><input type="range" min="10" max="500" value="100" class="slider" id="size2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse2">Delay</a>
+              <a data-toggle="collapse"  href="#collapse2" id='d'>Delay</a>
             </h4>
           </div>
           <div id="collapse2" class="panel-collapse collapse">
             <div class="panel-body">
               <p id="de1">PG1:</p>
-              <input type="range" min="1" max="5000" value="1" class="slider" id="delay1" onmouseup="mouseUp()"oninput="updateLabel()">
-              <p id="de2">PG2:</p><input type="range" min="1" max="5000" value="1" class="slider" id="delay2" onmouseup="mouseUp()"oninput="updateLabel()">
+              <input type="range" min="1" max="5000" value="1" class="slider" id="delay1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="de2">PG2:</p><input type="range" min="1" max="5000" value="1" class="slider" id="delay2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
@@ -112,13 +112,13 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse3">Total Players</a>
+              <a data-toggle="collapse"  href="#collapse3" id="tp">Total Players</a>
             </h4>
           </div>
           <div id="collapse3" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="tp1">PG1:</p><input type="range" min="1" max="20" value="2" class="slider" id="players1" onmouseup="mouseUp()" oninput="updateLabel()">
-              <p id="tp2">PG2:</p><input type="range" min="1" max="20" value="2" class="slider" id="players2" onmouseup="mouseUp()"oninput="updateLabel()">
+              <p id="tp1">PG1:</p><input type="range" min="1" max="20" value="2" class="slider" id="players1" onmouseup="mouseUp()" oninput="updateLabel()" onchange="change()">
+              <p id="tp2">PG2:</p><input type="range" min="1" max="20" value="2" class="slider" id="players2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
@@ -126,13 +126,13 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse4">Min Range</a>
+              <a data-toggle="collapse"  href="#collapse4" id='ir'>Min Range</a>
             </h4>
           </div>
           <div id="collapse4" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="mr1">PG1:</p><input type="range" min="15" max="100" value="15" class="slider" id="minR1" onmouseup="mouseUp()"oninput="updateLabel()">
-              <p id="mr2">PG2:</p><input type="range" min="15" max="100" value="15" class="slider" id="minR2" onmouseup="mouseUp()"oninput="updateLabel()">
+              <p id="mr1">PG1:</p><input type="range" min="15" max="100" value="15" class="slider" id="minR1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="mr2">PG2:</p><input type="range" min="15" max="100" value="15" class="slider" id="minR2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
@@ -140,13 +140,13 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse5">Max Range</a>
+              <a data-toggle="collapse"  href="#collapse5" id='mr'>Max Range</a>
             </h4>
           </div>
           <div id="collapse5" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="mx1">PG1:</p><input type="range" min="1000" max="1048" value="1024" class="slider" id="maxR1" onmouseup="mouseUp()"oninput="updateLabel()">
-              <p id="mx2">PG2:</p><input type="range" min="1000" max="1048" value="1024" class="slider" id="maxR2" onmouseup="mouseUp()"oninput="updateLabel()">
+              <p id="mx1">PG1:</p><input type="range" min="1000" max="1048" value="1024" class="slider" id="maxR1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="mx2">PG2:</p><input type="range" min="1000" max="1048" value="1024" class="slider" id="maxR2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
@@ -154,17 +154,18 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse6">Pairs</a>
+              <a data-toggle="collapse"  href="#collapse6" id='p'>Pairs</a>
             </h4>
           </div>
           <div id="collapse6" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="prs">pairs:</p><input type="range" min="0" max="2" value="1" class="slider" id="pairs" onmouseup="mouseUp()"oninput="updateLabel()">
+              <p id="prs">pairs:</p><input type="range" min="0" max="2" value="1" class="slider" id="pairs" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
         <br>
-        <button id="submit" onclick="click()">Submit</button>
+
+        <button id="submit" style="display: none; margin: auto;" onclick="click()">Submit</button>
 
       </div> 
       </div>
@@ -182,7 +183,12 @@
       document.getElementById("mx1").innerHTML = "PG1: " + document.getElementById("maxR1").value;
       document.getElementById("mx2").innerHTML = "PG2: " + document.getElementById("maxR2").value;
       document.getElementById("prs").innerHTML = "PG2: " + document.getElementById("pairs").value;
-
+      document.getElementById("ps").innerHTML = "Packet Size  " + document.getElementById("size1").value + "|" + document.getElementById("size2").value;
+      document.getElementById("d").innerHTML = "Delay  " + document.getElementById("delay1").value + "|" + document.getElementById("delay2").value;
+      document.getElementById("tp").innerHTML = "Total Players  " + document.getElementById("players1").value + "|" + document.getElementById("players2").value;
+      document.getElementById("ir").innerHTML = "Min Range  " + document.getElementById("minR1").value + "|" + document.getElementById("minR2").value;
+      document.getElementById("mr").innerHTML = "Max Range  " + document.getElementById("maxR2").value + "|" + document.getElementById("maxR2").value;
+      document.getElementById("p").innerHTML = "Pairs " + document.getElementById("pairs").value;
 
 
 
@@ -205,6 +211,10 @@
         }
         console.log(d)
         return d
+      }
+
+      function change(){
+        document.getElementById('submit').style.display = 'block';
       }
       </script>
   
@@ -373,10 +383,10 @@
 
   } )
 
-  var data1 = [1,2]
-  var data2 = [2,2]
-  var data3 = [3,3]
-  var data4 = [4,5]
+  var data1 = []
+  var data2 = []
+  var data3 = []
+  var data4 = []
 
   function mouseUp(){
 
@@ -384,6 +394,7 @@
 
   document.getElementById("submit").addEventListener("click", click)
   function click(){
+    document.getElementById('submit').style.display = 'none'
     out.innerHTML = "click";
     socket.emit( 'my event', getJSON() )
   }
@@ -402,6 +413,13 @@
     data3 = msg.set3.slice()
     data4 = msg.set4.slice()
 
+    massPopChart.data.datasets[0].data = data1;
+    massPopChart.data.datasets[1].data = data2;
+    massPopChart.data.datasets[2].data = data3;
+    massPopChart.data.datasets[3].data = data4;
+
+    massPopChart.update();
+  })
 
 Chart.defaults.global.defaultFontFamily = 'Lato';
 Chart.defaults.global.defaultFontSize = 18;
@@ -410,7 +428,7 @@ Chart.defaults.global.defaultFontColor = '#777';
 let massPopChart = new Chart(myChart, {
   type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data:{
-    labels:['Method 1', 'Method 2', 'Method 2'],
+    labels:['Method 1', 'Method 2', 'Method 3'],
     datasets:[{
       label:'P1.paired',
       data:data1,
@@ -500,7 +518,7 @@ let massPopChart = new Chart(myChart, {
   }
 });
 
-  })
+  
 
 
 // Global Options
