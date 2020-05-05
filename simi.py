@@ -110,22 +110,29 @@ def runSim(param):
     plist1 = []
     plist2_1 = []
     plist3_1 = []
+    plist4_1 = []
     for i in range(playerIn1):
         plist1.append(Player(i, packetSize1,packetDelay1,minRange1,maxRange1))
         plist2_1.append(Player(i, packetSize1,packetDelay1,minRange1,maxRange1))
         plist3_1.append(Player(i, packetSize1,packetDelay1,minRange1,maxRange1))
+        plist4_1.append(Player(i, packetSize1,packetDelay1,minRange1,maxRange1))
+
 
     plist2 = []
     plist2_2 = []
     plist3_2 = []
+    plist4_2 = []
     for i in range(playerIn2):
         plist2.append(Player(i, packetSize2,packetDelay2,minRange2,maxRange2))
         plist2_2.append(Player(i, packetSize2,packetDelay2,minRange2,maxRange2))
         plist3_2.append(Player(i, packetSize2,packetDelay2,minRange2,maxRange2))
+        plist4_2.append(Player(i, packetSize2,packetDelay2,minRange2,maxRange2))
 
     setPair(plist1, plist2)
     setPair(plist2_1, plist2_2)
     setPair(plist3_1, plist3_2)
+    setPair(plist4_1, plist4_2)
+
 
 
     y = 0
@@ -134,6 +141,8 @@ def runSim(param):
     z2 = 0
     y3 = 0
     z3 = 0
+    y4 = 0
+    z4 = 0
     for i in range(1000000):
 
         collision(plist1, minRange1)
@@ -299,21 +308,62 @@ def runSim(param):
             shift(plist3_2, plist3_1)
             z3 += 1
 
-    avgMoveUP1 = [0,0,0]
-    avgMoveP1 = [0,0,0]
-    avgMoveUP2 = [0,0,0]
-    avgMoveP2 = [0,0,0]
+
+        #HERE IS METHOD 4
+        collision(plist4_1, minRange1)
+        zc = zeroCheck(plist4_1) # holding on as variable
+        if y4==i and zc >= 0: #found something with a zero
+
+            
+            plist4_1[zc].minRange = minRange1
+            plist4_1[zc].moves += 1
+            plist4_1[zc].isPlaying = True
+            plist4_1[zc].setRand()
+            plist4_1[zc].place += packetDelay1
+            y4 += packetSize1
+
+
+        collision(plist4_2, minRange2)
+        zc = zeroCheck(plist4_2)
+        if z4 == i and zc >= 0:
+
+
+            plist4_2[zc].minRange = minRange2
+            plist4_2[zc].moves += 1
+            plist4_2[zc].isPlaying = True
+            plist4_2[zc].setRand()
+            plist4_2[zc].place += packetDelay2
+            z4 += packetSize2
+
+        if y4 == i:
+            shift(plist4_1, plist4_2)
+            y4 += 1
+
+        if z4 == i:
+            shift(plist4_2, plist4_1)
+            z4 += 1
+
+
+
+
+    avgMoveUP1 = [0,0,0,0]
+    avgMoveP1 = [0,0,0,0]
+    avgMoveUP2 = [0,0,0,0]
+    avgMoveP2 = [0,0,0,0]
     for i in range(playerIn1):
         if i < pairs:
             avgMoveP1[0] += plist1[i].moves/pairs
             avgMoveP1[1] += plist2_1[i].moves/pairs
             avgMoveP1[2] += plist3_1[i].moves/pairs
+            avgMoveP1[3] += plist4_1[i].moves/pairs
+
 
         else:
             #print(str(plist1[i].moves) + " " + str(plist1[i].moves/playerIn1-pairs))
             avgMoveUP1[0] += plist1[i].moves/(playerIn1-pairs)
             avgMoveUP1[1] += plist2_1[i].moves/(playerIn1-pairs)
             avgMoveUP1[2] += plist3_1[i].moves/(playerIn1-pairs)
+            avgMoveUP1[3] += plist4_1[i].moves/(playerIn1-pairs)
 
     for i in range(playerIn2):
         if i < pairs:
@@ -321,12 +371,14 @@ def runSim(param):
             avgMoveP2[0] += plist2[i].moves/pairs
             avgMoveP2[1] += plist2_2[i].moves/pairs
             avgMoveP2[2] += plist3_2[i].moves/pairs
+            avgMoveP2[3] += plist4_1[i].moves/pairs
         else:
             #print(str(plist1[i].moves) + " " + str(plist1[i].moves/playerIn1-pairs))
 
             avgMoveUP2[0] += plist2[i].moves/(playerIn2-pairs)
             avgMoveUP2[1] += plist2_2[i].moves/(playerIn2-pairs)
             avgMoveUP2[2] += plist3_2[i].moves/(playerIn2-pairs)
+            avgMoveUP2[3] += plist4_1[i].moves/(playerIn1-pairs)
 
 
     for p in plist1:
@@ -354,5 +406,5 @@ def runSim(param):
     for p in plist3_2:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
 
-
+    print(str([avgMoveP1, avgMoveUP1, avgMoveP2, avgMoveUP2]))
     return [avgMoveP1, avgMoveUP1, avgMoveP2, avgMoveUP2]
