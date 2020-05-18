@@ -269,7 +269,7 @@
     data:{
       labels:['Method 1', 'Method 2', 'Method 2'],
       datasets:[{
-        label:'P1.paired',
+        label:'L1.paired',
         data:[1,2,3,4
 
         ],
@@ -285,7 +285,7 @@
         hoverBorderColor:'#000'
       },
       {
-        label:'P1.unpaired',
+        label:'L1.unpaired',
         data:[1,2,3,4
 
         ],
@@ -299,7 +299,7 @@
         hoverBorderColor:'#000'
       },
       {
-        label:'P2.paired',
+        label:'L2.paired',
         data:[1,2,3,4],
         //backgroundColor:'green',
         backgroundColor:[
@@ -429,9 +429,9 @@ Chart.defaults.global.defaultFontColor = '#777';
 let massPopChart = new Chart(myChart, {
   type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data:{
-    labels:['Method 1', 'Method 2', 'Method 3', 'Method 4'],
+    labels:['BASELINE', 'EDCA-TRUNC', 'LTD-TRUNC', 'MLSR'],
     datasets:[{
-      label:'P1.paired',
+      label:'L1.paired',
       data:data1,
       //backgroundColor:'green',
       backgroundColor:[
@@ -446,7 +446,7 @@ let massPopChart = new Chart(myChart, {
       hoverBorderColor:'#000'
     },
     {
-      label:'P1.unpaired',
+      label:'L1.unpaired',
       data:data2,
       //backgroundColor:'green',
       backgroundColor:[
@@ -458,7 +458,7 @@ let massPopChart = new Chart(myChart, {
       hoverBorderColor:'#000'
     },
     {
-      label:'P2.paired',
+      label:'L2.paired',
       data:data3,
       //backgroundColor:'green',
       backgroundColor:[
@@ -473,7 +473,7 @@ let massPopChart = new Chart(myChart, {
       hoverBorderColor:'#000'
     },
     {
-      label:'P2.unpaired',
+      label:'L2.unpaired',
       data:data4,
       //backgroundColor:'green',
       backgroundColor:[
