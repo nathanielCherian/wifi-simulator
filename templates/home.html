@@ -84,27 +84,27 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse" href="#collapse1" id="ps">Packet size</a>
+              <a data-toggle="collapse" href="#collapse1" id="ps">Packet size(micro-sec)</a>
             </h4>
           </div>
           <div id="collapse1" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="sz1">PG1: </p><input type="range" min="10" max="500" value="100" class="slider" id="size1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
-              <p id="sz2">PG2:</p><input type="range" min="10" max="500" value="100" class="slider" id="size2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="sz1">Link 1: </p><input type="range" min="100" max="10000" value="500" class="slider" id="size1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="sz2">Link 2:</p><input type="range" min="100" max="10000" value="500" class="slider" id="size2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse2" id='d'>Delay</a>
+              <a data-toggle="collapse"  href="#collapse2" id='d'>Inter-Arrival(micro-sec)</a>
             </h4>
           </div>
           <div id="collapse2" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="de1">PG1:</p>
-              <input type="range" min="1" max="5000" value="1" class="slider" id="delay1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
-              <p id="de2">PG2:</p><input type="range" min="1" max="5000" value="1" class="slider" id="delay2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="de1">Link 1:</p>
+              <input type="range" min="10" max="50000" value="500" class="slider" id="delay1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="de2">Link 2:</p><input type="range" min="10" max="50000" value="500" class="slider" id="delay2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
@@ -112,13 +112,13 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse3" id="tp">Total Players</a>
+              <a data-toggle="collapse"  href="#collapse3" id="tp">STAs per Link</a>
             </h4>
           </div>
           <div id="collapse3" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="tp1">PG1:</p><input type="range" min="1" max="20" value="2" class="slider" id="players1" onmouseup="mouseUp()" oninput="updateLabel()" onchange="change()">
-              <p id="tp2">PG2:</p><input type="range" min="1" max="20" value="2" class="slider" id="players2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="tp1">Link 1:</p><input type="range" min="1" max="20" value="2" class="slider" id="players1" onmouseup="mouseUp()" oninput="updateLabel()" onchange="change()">
+              <p id="tp2">Link 2:</p><input type="range" min="1" max="20" value="2" class="slider" id="players2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
@@ -126,13 +126,13 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse4" id='ir'>Min Range</a>
+              <a data-toggle="collapse"  href="#collapse4" id='ir'>CWmin</a>
             </h4>
           </div>
           <div id="collapse4" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="mr1">PG1:</p><input type="range" min="15" max="100" value="15" class="slider" id="minR1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
-              <p id="mr2">PG2:</p><input type="range" min="15" max="100" value="15" class="slider" id="minR2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="mr1">Link 1:</p><input type="range" min="15" max="100" value="15" class="slider" id="minR1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="mr2">Link 2:</p><input type="range" min="15" max="100" value="15" class="slider" id="minR2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
@@ -140,13 +140,13 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse5" id='mr'>Max Range</a>
+              <a data-toggle="collapse"  href="#collapse5" id='mr'>CWmax</a>
             </h4>
           </div>
           <div id="collapse5" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="mx1">PG1:</p><input type="range" min="1000" max="1048" value="1024" class="slider" id="maxR1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
-              <p id="mx2">PG2:</p><input type="range" min="1000" max="1048" value="1024" class="slider" id="maxR2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="mx1">Link 1:</p><input type="range" min="1000" max="1048" value="1024" class="slider" id="maxR1" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="mx2">Link 2:</p><input type="range" min="1000" max="1048" value="1024" class="slider" id="maxR2" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
@@ -154,12 +154,12 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
-              <a data-toggle="collapse"  href="#collapse6" id='p'>Pairs</a>
+              <a data-toggle="collapse"  href="#collapse6" id='p'>MLO STAs</a>
             </h4>
           </div>
           <div id="collapse6" class="panel-collapse collapse">
             <div class="panel-body">
-              <p id="prs">pairs:</p><input type="range" min="0" max="2" value="1" class="slider" id="pairs" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
+              <p id="prs">MLO STAs:</p><input type="range" min="0" max="2" value="1" class="slider" id="pairs" onmouseup="mouseUp()"oninput="updateLabel()"onchange="change()">
             </div>
           </div>
         </div>
@@ -172,35 +172,36 @@
 
       <script type="text/javascript">
       function updateLabel(){
-      document.getElementById("sz1").innerHTML = "PG1: " + document.getElementById("size1").value;
-      document.getElementById("sz2").innerHTML = "PG2: " + document.getElementById("size2").value;
-      document.getElementById("de1").innerHTML = "PG1: " + document.getElementById("delay1").value;
-      document.getElementById("de2").innerHTML = "PG2: " + document.getElementById("delay2").value;
-      document.getElementById("tp1").innerHTML = "PG1: " + document.getElementById("players1").value;
-      document.getElementById("tp2").innerHTML = "PG2: " + document.getElementById("players2").value;
-      document.getElementById("mr1").innerHTML = "PG1: " + document.getElementById("minR1").value;
-      document.getElementById("mr2").innerHTML = "PG2: " + document.getElementById("minR2").value;
-      document.getElementById("mx1").innerHTML = "PG1: " + document.getElementById("maxR1").value;
-      document.getElementById("mx2").innerHTML = "PG2: " + document.getElementById("maxR2").value;
-      document.getElementById("prs").innerHTML = "PG2: " + document.getElementById("pairs").value;
-      document.getElementById("ps").innerHTML = "Packet Size  " + document.getElementById("size1").value + "|" + document.getElementById("size2").value;
-      document.getElementById("d").innerHTML = "Delay  " + document.getElementById("delay1").value + "|" + document.getElementById("delay2").value;
-      document.getElementById("tp").innerHTML = "Total Players  " + document.getElementById("players1").value + "|" + document.getElementById("players2").value;
-      document.getElementById("ir").innerHTML = "Min Range  " + document.getElementById("minR1").value + "|" + document.getElementById("minR2").value;
-      document.getElementById("mr").innerHTML = "Max Range  " + document.getElementById("maxR2").value + "|" + document.getElementById("maxR2").value;
-      document.getElementById("p").innerHTML = "Pairs " + document.getElementById("pairs").value;
+      document.getElementById("sz1").innerHTML = "Link 1: " + document.getElementById("size1").value;
+      document.getElementById("sz2").innerHTML = "Link 2: " + document.getElementById("size2").value;
+      document.getElementById("de1").innerHTML = "Link 1: " + document.getElementById("delay1").value;
+      document.getElementById("de2").innerHTML = "Link 2: " + document.getElementById("delay2").value;
+      document.getElementById("tp1").innerHTML = "Link 1: " + document.getElementById("players1").value;
+      document.getElementById("tp2").innerHTML = "Link 2: " + document.getElementById("players2").value;
+      document.getElementById("mr1").innerHTML = "Link 1: " + document.getElementById("minR1").value;
+      document.getElementById("mr2").innerHTML = "Link 2: " + document.getElementById("minR2").value;
+      document.getElementById("mx1").innerHTML = "Link 1: " + document.getElementById("maxR1").value;
+      document.getElementById("mx2").innerHTML = "Link 2: " + document.getElementById("maxR2").value;
+      document.getElementById("prs").innerHTML = "MLO STAs:" + document.getElementById("pairs").value;
+      document.getElementById("ps").innerHTML = "Packet size(micro-sec)  " + document.getElementById("size1").value + "|" + document.getElementById("size2").value;
+      document.getElementById("d").innerHTML = "Inter-Arrival(micro-sec)  " + document.getElementById("delay1").value + "|" + document.getElementById("delay2").value;
+      document.getElementById("tp").innerHTML = "STAs per Link  " + document.getElementById("players1").value + "|" + document.getElementById("players2").value;
+      document.getElementById("ir").innerHTML = "CWmin  " + document.getElementById("minR1").value + "|" + document.getElementById("minR2").value;
+      document.getElementById("mr").innerHTML = "CWmax  " + document.getElementById("maxR2").value + "|" + document.getElementById("maxR2").value;
+      document.getElementById("p").innerHTML = "MLO STAs " + document.getElementById("pairs").value;
 
 
 
     }
       updateLabel();
 
+      
       function getJSON(){
         d = {
-      "size1":document.getElementById("size1").value,
-      "size2":document.getElementById("size2").value,
-      "delay1":document.getElementById("delay1").value,
-      "delay2":document.getElementById("delay2").value,
+      "size1":Math.round(document.getElementById("size1").value/9),
+      "size2":Math.round(document.getElementById("size2").value/9),
+      "delay1":Math.round(document.getElementById("delay1").value/9),
+      "delay2":Math.round(document.getElementById("delay2").value/9),
       "players1":document.getElementById("players1").value,
       "players2":document.getElementById("players2").value,
       "minR1":document.getElementById("minR1").value,
