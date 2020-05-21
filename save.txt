@@ -1,0 +1,70 @@
+    cdf = {'plist1':[[],[]],'plist2':[[],[]],'plist2_1':[[],[]],'plist2_2':[[],[]],'plist3_1':[[],[]],'plist3_2':[[],[]],'plist3_1':[[],[]],'plist3_2':[[],[]],'plist4_1':[[],[]],'plist4_2':[[],[]]}
+
+
+    for p in plist1:
+        print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        if p.pair != 0:
+            cdf['plist1'][0] += p.accWait
+        else:
+            cdf['plist1'][1] += p.accWait
+
+        
+
+    print("\n\n")
+    for p in plist2:
+        print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        if p.pair != 0:
+            cdf['plist2'][0] += p.accWait
+        else:
+            cdf['plist2'][1] += p.accWait
+
+
+    print("\nsecond method")
+
+    for p in plist2_1:
+        print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        if p.pair != 0:
+            cdf['plist2_1'][0] += p.accWait
+        else:
+            cdf['plist2_1'][1] += p.accWait
+
+    print("\n\n")
+    for p in plist2_2:
+        print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        if p.pair != 0:
+            cdf['plist2_2'][0] += p.accWait
+        else:
+            cdf['plist2_2'][1] += p.accWait
+
+
+    print("\nthird method")
+
+    for p in plist3_1:
+        print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        if p.pair != 0:
+            cdf['plist3_1'][0] += p.accWait
+        else:
+            cdf['plist3_1'][1] += p.accWait
+
+
+    print("\n\n")
+    for p in plist3_2:
+        print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        if p.pair != 0:
+            cdf['plist3_2'][0] += p.accWait
+        else:
+            cdf['plist3_2'][1] += p.accWait
+
+
+    for p in plist4_1:
+        if p.pair != 0:
+            cdf['plist4_1'][0] += p.accWait
+        else:
+            cdf['plist4_1'][1] += p.accWait
+
+
+    for p in plist4_2:
+        if p.pair != 0:
+            cdf['plist4_2'][0] += p.accWait
+        else:
+            cdf['plist4_2'][1] += p.accWait

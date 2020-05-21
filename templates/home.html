@@ -84,7 +84,7 @@
     <div class="col-sm-2" style="height: fit-content; background-color: rgb(190, 194, 194);">
       
     
-      <div class="slidecontainer" style="padding-bottom: 30px; height: 700px; padding-top: 20px;">
+      <div class="slidecontainer" style="padding-bottom: 30px; height: 1300px; padding-top: 20px;">
 
       <div class="panel-group" id="accordion" style="height: 100%;">
         <div class="panel panel-default">
@@ -231,7 +231,10 @@
 
     <div class="col-sm-8 text-center"> 
       <div class="container" style="margin-top: 5%;">
+        
         <canvas id="myChart"></canvas>
+        <hr>
+        <canvas id="myScatterChart"></canvas>
       </div>
     </div>
   </div>
@@ -261,111 +264,7 @@
 </script>
 
 <script type="text/javascript">
-/*
-  let myChart = document.getElementById('myChart').getContext('2d');
 
-  // Global Options
-  Chart.defaults.global.defaultFontFamily = 'Lato';
-  Chart.defaults.global.defaultFontSize = 18;
-  Chart.defaults.global.defaultFontColor = '#777';
-
-  let massPopChart = new Chart(myChart, {
-    type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-    data:{
-      labels:['Method 1', 'Method 2', 'Method 2'],
-      datasets:[{
-        label:'L1.paired',
-        data:[1,2,3,4
-
-        ],
-        //backgroundColor:'green',
-        backgroundColor:[
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-        ],
-        borderWidth:1,
-        borderColor:'#777',
-        hoverBorderWidth:3,
-        hoverBorderColor:'#000'
-      },
-      {
-        label:'L1.unpaired',
-        data:[1,2,3,4
-
-        ],
-        //backgroundColor:'green',
-        backgroundColor:[
-        'red','green','blue'
-        ],
-        borderWidth:1,
-        borderColor:'#777',
-        hoverBorderWidth:3,
-        hoverBorderColor:'#000'
-      },
-      {
-        label:'L2.paired',
-        data:[1,2,3,4],
-        //backgroundColor:'green',
-        backgroundColor:[
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-        ],
-        borderWidth:1,
-        borderColor:'#777',
-        hoverBorderWidth:3,
-        hoverBorderColor:'#000'
-      },
-      {
-        label:'P2.unpaired',
-        data:[1,2,3,4],
-        //backgroundColor:'green',
-        backgroundColor:[
-        'red','green','blue'
-        ],
-        borderWidth:1,
-        borderColor:'#777',
-        hoverBorderWidth:3,
-        hoverBorderColor:'#000'
-      }
-      ]
-    },
-
-    options:{
-      title:{
-        display:true,
-        text:'Average moves for every player',
-        fontSize:25
-      },
-      legend:{
-        display:true,
-        position:'right',
-        labels:{
-          fontColor:'#000'
-        }
-      },
-      layout:{
-        padding:{
-          left:50,
-          right:0,
-          bottom:0,
-          top:0
-        }
-      },
-      tooltips:{
-        enabled:true
-      },
-      scales: {
-          yAxes: [{
-              ticks: {
-                beginAtZero:true
-              }
-          }]
-      }
-    }
-  });
-*/
 </script>
 
 
@@ -380,6 +279,8 @@
   var sliders = document.getElementsByClassName('slider');
 
   let myChart = document.getElementById('myChart').getContext('2d');
+  let myScatterChart = document.getElementById('myScatterChart').getContext('2d');
+
 
 
 
@@ -393,6 +294,8 @@
   var data2 = []
   var data3 = []
   var data4 = []
+  var cd = [[],[],[],[],[],[],[],[]]
+
 
   function mouseUp(){
 
@@ -423,7 +326,32 @@
     massPopChart.data.datasets[2].data = data3;
     massPopChart.data.datasets[3].data = data4;
 
+    cd = [[],[],[],[],[],[],[],[]]
+    
+    for(var c = 0; c < 8; c++){
+      scatterChart.data.datasets[c].data = cd[c];
+    }
+    //scatterChart.data.datasets[0].data = cd[0];
+    for(var x = 0; x < 4; x++){ //x = method#
+      for(var y = 0; y<2; y++){ //y = p or up, last one is 0:x 1:y
+
+        var placeInCD = (2*x)+y
+        for(var i = 0; i < msg.cdf[x][y][0].length; i++){
+        xx = msg.cdf[x][y][0][i]
+        yy = msg.cdf[x][y][1][i]
+
+        cd[placeInCD].push({x:xx,y:yy})
+        }
+        console.log(cd[placeInCD])
+
+      }
+    }
+
+
     massPopChart.update();
+    
+    scatterChart.update()
+    
   })
 
 Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -433,7 +361,7 @@ Chart.defaults.global.defaultFontColor = '#777';
 let massPopChart = new Chart(myChart, {
   type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
   data:{
-    labels:['BASELINE', 'EDCA-TRUNC', 'LTD-TRUNC', 'MLSR'],
+    labels:['1.BASELINE', '2.EDCA-TRUNC', '3.LTD-TRUNC', '4.MLSR'],
     datasets:[{
       label:'L1.paired',
       data:data1,
@@ -525,7 +453,81 @@ let massPopChart = new Chart(myChart, {
   }
 });
 
-  
+var scatterChart = new Chart(myScatterChart, {
+    type: 'line',
+    data: {
+        datasets: [{
+            label: '1p',
+            borderColor: 'red',
+            data: cd[0],
+            fill: false,
+            pointRadius: 0
+        },
+        {
+            label: '1u',
+            borderColor: 'pink',
+            data: cd[1],
+            fill: false,
+            pointRadius: 0
+        },
+        {
+            label: '2p',
+            borderColor: 'yellow',
+            data: cd[2],
+            fill: false,
+            pointRadius: 0
+        },
+        {
+            label: '2u',
+            borderColor: 'purple',
+            data: cd[3],
+            fill: false,
+            pointRadius: 0
+        },
+        {
+            label: '3p',
+            borderColor: 'black',
+            data: cd[4],
+            fill: false,
+            pointRadius: 0
+        },
+        {
+            label: '3u',
+            borderColor: 'gray',
+            data: cd[5],
+            fill: false,
+            pointRadius: 0
+        },
+        {
+            label: '4p',
+            borderColor: 'green',
+            data: cd[6],
+            fill: false,
+            pointRadius: 0
+        },
+        {
+            label: '4u',
+            borderColor: 'blue',
+            data: cd[7],
+            fill: false,
+            pointRadius: 0
+        },]
+
+    },
+    options: {
+        scales: {
+            xAxes: [{
+                type: 'linear',
+                position: 'bottom'
+            }]
+        },
+        title:{
+        display:true,
+        text:'CDF of access waits',
+        fontSize:25
+      }
+    }
+});
 
 
 // Global Options

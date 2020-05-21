@@ -173,7 +173,7 @@ def runSim(param):
     z3 = 0
     y4 = 0
     z4 = 0
-    for i in range(1000000):
+    for i in range(100000):
 
         collision(plist1, minRange1)
         zc = zeroCheck(plist1) # holding on as variable
@@ -189,7 +189,8 @@ def runSim(param):
                 plist2[pr].setRand()
                 plist2[pr].place += packetDelay2
                 z += packetSize2
-        
+                plist2[pr].accWait.append(0)
+
     
             plist1[zc].minRange = minRange1
             plist1[zc].moves += 1
@@ -197,6 +198,7 @@ def runSim(param):
             plist1[zc].setRand()
             plist1[zc].place += packetDelay1
             y += packetSize1
+            plist1[zc].accWait.append(0)
 
 
         collision(plist2, minRange2)
@@ -213,6 +215,8 @@ def runSim(param):
                 plist1[pr].setRand()
                 plist1[pr].place += packetDelay1
                 y += packetSize1
+                plist1[pr].accWait.append(0)
+
 
             plist2[zc].minRange = minRange2
             plist2[zc].moves += 1
@@ -220,6 +224,8 @@ def runSim(param):
             plist2[zc].setRand()
             plist2[zc].place += packetDelay2
             z += packetSize2
+            plist2[zc].accWait.append(0)
+
 
         if y == i:
             shift(plist1, plist2)
@@ -432,51 +438,78 @@ def runSim(param):
             avgMoveUP2[2] += plist3_2[i].moves/(playerIn2-pairs)
             avgMoveUP2[3] += plist4_1[i].moves/(playerIn1-pairs)
 
-    import csv, os
 
-    os.chdir(r'C:\Users\Nathan\pyProjects\numpy')
-    f = open('testGr.csv', 'w', newline='')
-    writer = csv.writer(f)
+    cdf = {'method1':[[],[]],'method2':[[],[]],'method3':[[],[]],'method4':[[],[]]}
 
 
     for p in plist1:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
-        writer.writerow(p.accWait)
+        if p.pair != 0:
+            cdf['method1'][0] += p.accWait
+        else:
+            cdf['method1'][1] += p.accWait
+
+        
 
     print("\n\n")
     for p in plist2:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
-        writer.writerow(p.accWait)
+        if p.pair != 0:
+            cdf['method1'][0] += p.accWait
+        else:
+            cdf['method1'][1] += p.accWait
+
 
     print("\nsecond method")
 
     for p in plist2_1:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
-        writer.writerow(p.accWait)
+        if p.pair != 0:
+            cdf['method2'][0] += p.accWait
+        else:
+            cdf['method2'][1] += p.accWait
 
     print("\n\n")
     for p in plist2_2:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
-        writer.writerow(p.accWait)
+        if p.pair != 0:
+            cdf['method2'][0] += p.accWait
+        else:
+            cdf['method2'][1] += p.accWait
+
 
     print("\nthird method")
 
     for p in plist3_1:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
-        writer.writerow(p.accWait)
+        if p.pair != 0:
+            cdf['method3'][0] += p.accWait
+        else:
+            cdf['method3'][1] += p.accWait
+
 
     print("\n\n")
     for p in plist3_2:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
-        writer.writerow(p.accWait)
+        if p.pair != 0:
+            cdf['method3'][0] += p.accWait
+        else:
+            cdf['method3'][1] += p.accWait
+
 
     for p in plist4_1:
-        writer.writerow(p.accWait)
+        if p.pair != 0:
+            cdf['method4'][0] += p.accWait
+        else:
+            cdf['method4'][1] += p.accWait
+
 
     for p in plist4_2:
-        writer.writerow(p.accWait)
-
-    f.close()
+        if p.pair != 0:
+            cdf['method4'][0] += p.accWait
+        else:
+            cdf['method4'][1] += p.accWait
+    
 
     print(str([avgMoveP1, avgMoveUP1, avgMoveP2, avgMoveUP2]))
 
@@ -486,4 +519,4 @@ def runSim(param):
         print('1,'+str(i)+': ' + str(plist1[i].accWait))
         print('2,'+str(i)+': ' + str(plist2[i].accWait))  """
 
-    return [avgMoveP1, avgMoveUP1, avgMoveP2, avgMoveUP2]
+    return {'data':[avgMoveP1, avgMoveUP1, avgMoveP2, avgMoveUP2], 'cdf':cdf}
