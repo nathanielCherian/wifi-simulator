@@ -27,6 +27,7 @@ def runSim(param):
         _id = 0
         packetSize = 0
         packetDelay = 0
+        staticMinRange = 0
         minRange = 0
         maxRange = 0
 
@@ -40,19 +41,31 @@ def runSim(param):
         totalP = 0
         collisionsC = 0
 
+        accWait = [0]
+
         def __init__(self, _id, packetSize, packetDelay, minRange, maxRange):
             self._id = _id
             self.packetSize = packetSize
             self.packetDelay = packetDelay
+            self.staticMinRange = minRange
             self.minRange = minRange
             self.maxRange = maxRange
             self.setRand()
+            self.accWait = [0]
+            print(str(self.staticMinRange) + "  " + str(self.packetSize) + "  " + str(self.packetDelay) + "  ")
         
         def setRand(self):
             self.place = randint(0, self.minRange)
 
         def pairRand(self):
             self.place += randint(0, self.minRange)
+
+        def playerMoves(self):
+            self.minRange = self.staticMinRange
+            self.moves += 1
+            self.isPlaying = True
+            self.place += self.packetDelay
+            self.accWait.append(0)
 
     def zeroCheck(plist):   #returns index of 0 or 1
         l = []
@@ -106,6 +119,23 @@ def runSim(param):
         for i in range(pairs):
             plistOne[i].pair = i+1
             plistTwo[i].pair = i+1
+    
+    def incrw(plist, oplist):
+        for p in plist:
+            if p.isPlaying == False:
+                p.accWait[-1] += 1
+#               print("INCR 1 " + str(p._id) + ": " + str(p.accWait))
+#            else:
+#                print("\n1PLAYING " + str(p._id) + "\n")
+
+        for p in oplist:
+            if p.isPlaying == False:
+                p.accWait[-1] += 1
+#               print("INCR 2 " + str(p._id) + ": " + str(p.accWait))           
+#            else:
+#              print("\n2PLAYING " + str(p._id) + "\n")
+
+        
 
     plist1 = []
     plist2_1 = []
@@ -159,7 +189,8 @@ def runSim(param):
                 plist2[pr].setRand()
                 plist2[pr].place += packetDelay2
                 z += packetSize2
-            
+        
+    
             plist1[zc].minRange = minRange1
             plist1[zc].moves += 1
             plist1[zc].isPlaying = True
@@ -198,6 +229,7 @@ def runSim(param):
             shift(plist2, plist1)
             z += 1
 
+        incrw(plist1,plist2)
     #HERE ON IS METHOD2(3)
 
         collision(plist2_1, minRange1)
@@ -214,13 +246,17 @@ def runSim(param):
                 plist2_2[pr].pairRand()
                 plist2_2[pr].place += packetDelay2
                 z2 += packetSize2
+                plist2_2[pr].accWait.append(0)
             
+
             plist2_1[zc].minRange = minRange1
             plist2_1[zc].moves += 1
             plist2_1[zc].isPlaying = True
             plist2_1[zc].setRand()
             plist2_1[zc].place += packetDelay1
             y2 += packetSize1
+            plist2_1[zc].accWait.append(0)
+
 
 
         collision(plist2_2, minRange2)
@@ -237,6 +273,8 @@ def runSim(param):
                 plist2_1[pr].pairRand()
                 plist2_1[pr].place += packetDelay1
                 y2 += packetSize1
+                plist2_1[pr].accWait.append(0)
+
 
             plist2_2[zc].minRange = minRange2
             plist2_2[zc].moves += 1
@@ -244,6 +282,8 @@ def runSim(param):
             plist2_2[zc].setRand()
             plist2_2[zc].place += packetDelay2
             z2 += packetSize2
+            plist2_2[zc].accWait.append(0)
+
 
         if y2 == i:
             shift(plist2_1, plist2_2)
@@ -252,6 +292,8 @@ def runSim(param):
         if z2 == i:
             shift(plist2_2, plist2_1)
             z2 += 1
+
+        incrw(plist2_1,plist2_2)
 
     # HERE IS METHOD 3
 
@@ -269,6 +311,8 @@ def runSim(param):
                 plist3_2[pr].setRand()
                 plist3_2[pr].place += packetDelay2
                 z3 += packetSize2
+                plist3_2[pr].accWait.append(0)
+
             
             plist3_1[zc].minRange = minRange1
             plist3_1[zc].moves += 1
@@ -276,6 +320,7 @@ def runSim(param):
             plist3_1[zc].setRand()
             plist3_1[zc].place += packetDelay1
             y3 += packetSize1
+            plist3_1[zc].accWait.append(0)
 
 
         collision(plist3_2, minRange2)
@@ -292,6 +337,7 @@ def runSim(param):
                 plist3_1[pr].setRand()
                 plist3_1[pr].place += packetDelay1
                 y3 += packetSize1
+                plist3_1[pr].accWait.append(0)
 
             plist3_2[zc].minRange = minRange2
             plist3_2[zc].moves += 1
@@ -299,6 +345,7 @@ def runSim(param):
             plist3_2[zc].setRand()
             plist3_2[zc].place += packetDelay2
             z3 += packetSize2
+            plist3_2[zc].accWait.append(0)
 
         if y3 == i:
             shift(plist3_1, plist3_2)
@@ -308,6 +355,7 @@ def runSim(param):
             shift(plist3_2, plist3_1)
             z3 += 1
 
+        incrw(plist3_1,plist3_2)
 
         #HERE IS METHOD 4
         collision(plist4_1, minRange1)
@@ -321,6 +369,7 @@ def runSim(param):
             plist4_1[zc].setRand()
             plist4_1[zc].place += packetDelay1
             y4 += packetSize1
+            plist4_1[zc].accWait.append(0)
 
 
         collision(plist4_2, minRange2)
@@ -334,6 +383,8 @@ def runSim(param):
             plist4_2[zc].setRand()
             plist4_2[zc].place += packetDelay2
             z4 += packetSize2
+            plist4_2[zc].accWait.append(0)
+
 
         if y4 == i:
             shift(plist4_1, plist4_2)
@@ -343,6 +394,7 @@ def runSim(param):
             shift(plist4_2, plist4_1)
             z4 += 1
 
+        incrw(plist4_1,plist4_2)
 
 
 
@@ -380,31 +432,58 @@ def runSim(param):
             avgMoveUP2[2] += plist3_2[i].moves/(playerIn2-pairs)
             avgMoveUP2[3] += plist4_1[i].moves/(playerIn1-pairs)
 
+    import csv, os
+
+    os.chdir(r'C:\Users\Nathan\pyProjects\numpy')
+    f = open('testGr.csv', 'w', newline='')
+    writer = csv.writer(f)
+
 
     for p in plist1:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        writer.writerow(p.accWait)
 
     print("\n\n")
     for p in plist2:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        writer.writerow(p.accWait)
 
     print("\nsecond method")
 
     for p in plist2_1:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        writer.writerow(p.accWait)
 
     print("\n\n")
     for p in plist2_2:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        writer.writerow(p.accWait)
 
     print("\nthird method")
 
     for p in plist3_1:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        writer.writerow(p.accWait)
 
     print("\n\n")
     for p in plist3_2:
         print(str(p.moves) +" : " + str(p.collisionsC) + " : " + str(p.pairPC))
+        writer.writerow(p.accWait)
+
+    for p in plist4_1:
+        writer.writerow(p.accWait)
+
+    for p in plist4_2:
+        writer.writerow(p.accWait)
+
+    f.close()
 
     print(str([avgMoveP1, avgMoveUP1, avgMoveP2, avgMoveUP2]))
+
+
+    """
+    for i in range(len(plist1)):
+        print('1,'+str(i)+': ' + str(plist1[i].accWait))
+        print('2,'+str(i)+': ' + str(plist2[i].accWait))  """
+
     return [avgMoveP1, avgMoveUP1, avgMoveP2, avgMoveUP2]
